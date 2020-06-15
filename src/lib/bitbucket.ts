@@ -1,8 +1,6 @@
 import BitbucketServer from '@atlassian/bitbucket-server'
 import * as config from './config'
 
-const projectKey = config.getConfigValue('projectKey')
-const repositorySlug = config.getConfigValue('repositorySlug')
 const baseUrl = process.env.BITBUCKET_BASE_URL
 const username = process.env.BITBUCKET_USERNAME
 const password = process.env.BITBUCKET_PASSWORD
@@ -38,9 +36,11 @@ export const createPR = (
   name: string,
   targetBranch: string | undefined
 ): void => {
+  const projectKey = config.getConfigValue('projectKey') ?? ''
+  const repositorySlug = config.getConfigValue('repositorySlug') ?? ''
   client.repos.createPullRequest({
-    projectKey: projectKey ?? '',
-    repositorySlug: repositorySlug ?? '',
+    projectKey,
+    repositorySlug,
     body: {
       title: `Merge ${type} branch ${name}`,
       fromRef: {
