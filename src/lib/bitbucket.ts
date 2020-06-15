@@ -5,10 +5,12 @@ const baseUrl = process.env.BITBUCKET_BASE_URL?.trim()
 const username = process.env.BITBUCKET_USERNAME?.trim()
 const password = process.env.BITBUCKET_PASSWORD?.trim()
 
+console.log(encodeURI(`${baseUrl}/test`))
+
 export const isOK = (): boolean => !!baseUrl && !!username && !!password
 
 const clientOptions = {
-  baseUrl: process.env.BITBUCKET_BASE_URL,
+  baseUrl,
   headers: {},
   options: {
     timeout: 10,
