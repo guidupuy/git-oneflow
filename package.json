@@ -1,7 +1,7 @@
 {
-  "name": "git-oneflow",
-  "version": "1.1.0",
-  "description": "CLI tooling implementing GIT OneFlow branching model",
+  "name": "git-oneflow-bb",
+  "version": "1.1.1",
+  "description": "CLI tooling implementing GIT OneFlow branching model, with BitBucket Server pull requests",
   "bin": {
     "gof": "bin/cli",
     "git-oneflow": "bin/cli"
@@ -35,12 +35,12 @@
     "Adam",
     "Ruka"
   ],
-  "author": "Mirco Sanguineti",
+  "author": "Guillaume Dupuy",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/msanguineti/git-oneflow/issues"
+    "url": "https://github.com/guidupuy/git-oneflow-bb/issues"
   },
-  "homepage": "https://github.com/msanguineti/git-oneflow#readme",
+  "homepage": "https://github.com/guidupuy/git-oneflow-bb#readme",
   "devDependencies": {
     "@babel/core": "^7.10.2",
     "@babel/plugin-proposal-class-properties": "^7.10.1",
