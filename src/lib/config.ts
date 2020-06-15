@@ -63,7 +63,6 @@ export const load = (file?: string): void => {
   for (const key in gofConfig) {
     if (Object.prototype.hasOwnProperty.call(defaultConfiguration, key)) {
       const value = gofConfig[key]
-      console.log(key, value)
 
       // just create envvars if the value is truthy
       if (value) process.env[`gof_${key}`.toUpperCase()] = value
