@@ -13,7 +13,7 @@ const clientOptions = {
   baseUrl,
   headers: {},
   options: {
-    timeout: 10,
+    timeout: 60000,
   },
 }
 
