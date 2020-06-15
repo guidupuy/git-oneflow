@@ -5,6 +5,7 @@ import makeInitCmd from './cmds/init'
 import makeStartCmd from './cmds/start'
 import * as config from './lib/config'
 import * as git from './lib/git'
+import * as bb from './lib/bitbucket'
 import * as log from './lib/log'
 
 const main = async (): Promise<void> => {
@@ -12,6 +13,11 @@ const main = async (): Promise<void> => {
     throw new Error('git not installed or not in a valid git repository')
 
   config.load()
+
+  if (!bb.isOK())
+    throw new Error(
+      'Please make sure the project key and repository slug are configured in .gitoneflowrc, and set your bitbucket credentials in the following env variables: BITBUCKET_BASE_URL, BITBUCKET_USERNAME, BITBUCKET_PASSWORD'
+    )
 
   program
     .name(packageJson.name)

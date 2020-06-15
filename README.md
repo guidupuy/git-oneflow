@@ -1,15 +1,12 @@
 # git-OneFlow <!-- omit in toc -->
 
-[![CodeFactor](https://www.codefactor.io/repository/github/msanguineti/git-oneflow/badge/master)](https://www.codefactor.io/repository/github/msanguineti/git-oneflow/overview/master)
-[![npm](https://badgen.net/npm/v/git-oneflow)](https://www.npmjs.com/package/git-oneflow)
-[![code style: prettier](https://badgen.net/badge/code%20style/prettier/ff69b4)](https://prettier.io/) [![Conventional Commits](https://badgen.net/badge/Conventional%20Commits/1.0.0/d4ac20)](https://conventionalcommits.org)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=msanguineti/git-oneflow)](https://dependabot.com)
-
-> CLI tools implementing the _OneFlow_ git branching model.
+> CLI tools implementing the _OneFlow_ git branching model
 
 OneFlow is a git branching model proposed by [Adam Ruka](https://github.com/skinny85) as an [alternative to GitFlow](https://www.endoflineblog.com/gitflow-considered-harmful).
 
 In [this article](https://www.endoflineblog.com/oneflow-a-git-branching-model-and-workflow#develop-feature-branches), Adam describes how it works and when it should be employed.
+
+This project puts together some CLI commands to leverage the OneFlow model. It is heavily based on [this repo](https://github.com/msanguineti/git-oneflow) by M. Sanguineti (MIT license), and includes a few minor modifications, notably to support Bitbucket PRs.
 
 **_This workflow is not for the uninitiated:_**
 
@@ -19,8 +16,6 @@ In [this article](https://www.endoflineblog.com/oneflow-a-git-branching-model-an
 4. No Profit :( and surefire way to mess things up quickly and embarrassingly.
 
 For a good overview of why you should _and_ when you shouldn't use rebase read [this](https://git-scm.com/book/en/v2/Git-Branching-Rebasing#_rebase_peril)
-
-I have simply put together some CLI commands to leverage the OneFlow model.
 
 I have remained strictly faithful to how Adam defines the worlflow without adding anything fancy (yet). This means that, by default, **_git-OneFlow_** works with one main branch only (`master`) and new features are rebased. Check the [initialisation](#initialisation) section.
 
@@ -96,6 +91,17 @@ $ gof finish feature my-feature
 # equivalent to...
 $ git checkout feature/my-feature
 $ git rebase -i master
+```
+
+- issuing a PR to merge `feature/my-feature` into `master`
+
+If you have commit rights on `master`, you may use the `--merge` flag to skip the PR step:
+
+```sh
+$ gof finish feature my-feature --merge
+# equivalent to...
+$ git checkout feature/my-feature
+$ git rebase -i master
 $ git checkout master
 $ git merge --ff-only feature/my-feature
 $ git push origin master
@@ -124,6 +130,8 @@ $ git merge release/2.3.0
 $ git push --follow-tags origin master
 $ git branch -d release/2.3.0
 ```
+
+Note that you need commit rights on `master` as well as the permission to create tags to use `finish relase` and `finish hotfix`
 
 ##### Tags
 

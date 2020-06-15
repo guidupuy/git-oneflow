@@ -89,6 +89,12 @@ export const mergeBranch = (from: string, strategy?: string): void => {
   else executeOrDie(cmd)
 }
 
+export const pullFromOrigin = (branch: string): void => {
+  if (process.env.GOF_CHICKENOUT)
+    log.info('dry-run', `git pull origin ${branch}`)
+  else executeOrDie(`git pull origin ${branch}`)
+}
+
 export const pushToOrigin = (branch: string, tag?: string | boolean): void => {
   if (process.env.GOF_CHICKENOUT)
     log.info(

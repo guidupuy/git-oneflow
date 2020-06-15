@@ -3,6 +3,7 @@ import * as gofCommand from './gofCommand'
 import * as config from '../lib/config'
 import * as inquisitor from '../lib/inquisitor'
 import * as git from '../lib/git'
+import * as bb from '../lib/bitbucket'
 import * as log from '../lib/log'
 
 const askTagNameToUser = async (): Promise<string | undefined> => {
@@ -28,7 +29,10 @@ const commonOptions: gofCommand.GofCmdOption[] = [
     flags: '--no-push',
     desc: 'do not push',
   },
-
+  {
+    flags: '--merge',
+    desc: 'merge finished feature directly instead of issuing a pull request',
+  },
   {
     flags: '-d,--delete',
     desc: 'delete branch after merge',
@@ -113,7 +117,7 @@ const maybeCheckoutAndGetBranchName = async (
 const getTag = async (cmd: commander.Command): Promise<string | false> => {
   const tag: string = cmd.tag ?? (await askTagNameToUser())
   if (tag) git.tagBranch(tag, cmd.message ?? tag)
-  else log.warning('commit has not being tagged!')
+  else log.warning('commit has not been tagged!')
   return tag
 }
 
@@ -160,8 +164,6 @@ const releaseHotfixAction = async (
 
   git.mergeBranch(branchName)
 
-  // const push = cmd.push ?? config.getConfigValue('pushAfterMerge') === 'true'
-  // if (push) git.pushToOrigin(onto, tag)
   maybePush(cmd.push, onto, tag)
 
   await maybeDeleteBranch(cmd.delete, branchName)
@@ -242,12 +244,13 @@ const feature: gofCommand.GofCommand = {
   action: async (arg: string, cmd: commander.Command) => {
     const strategy = getStrategy(cmd)
 
-    const branchName = await maybeCheckoutAndGetBranchName(cmd, arg)
-
     const onto =
       cmd.onto ??
       config.getConfigValue('development') ??
       config.getConfigValue('main')
+    git.pullFromOrigin(onto)
+
+    const branchName = await maybeCheckoutAndGetBranchName(cmd, arg)
 
     if (/^rebase/.test(strategy))
       git.rebase(
@@ -255,14 +258,18 @@ const feature: gofCommand.GofCommand = {
         cmd.interactive ?? config.getConfigValue('interactive') === 'true'
       )
 
-    git.checkoutBranch(onto)
+    if (cmd.merge) {
+      git.checkoutBranch(onto)
 
-    if (/no-ff/.test(strategy)) git.mergeBranch(branchName, '--no-ff')
-    else git.mergeBranch(branchName, '--ff-only')
+      if (/no-ff/.test(strategy)) git.mergeBranch(branchName, '--no-ff')
+      else git.mergeBranch(branchName, '--ff-only')
 
-    maybePush(cmd.push, onto, false)
+      maybePush(cmd.push, onto, false)
 
-    await maybeDeleteBranch(cmd.delete, branchName)
+      await maybeDeleteBranch(cmd.delete, branchName)
+    } else {
+      bb.createPR(bb.PRType.Feature, arg, onto)
+    }
   },
 }
 

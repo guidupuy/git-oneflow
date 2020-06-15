@@ -70,6 +70,7 @@
     "typescript": "^3.9.5"
   },
   "dependencies": {
+    "@atlassian/bitbucket-server": "0.0.6",
     "chalk": "^4.1.0",
     "commander": "^5.1.0",
     "cosmiconfig": "^6.0.0",
