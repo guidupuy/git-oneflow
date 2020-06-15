@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/msanguineti/git-oneflow/compare/v1.2.2...v1.3.0) (2020-06-15)
+
+### Features
+
+- increase bb timeout ([5d643ba](https://github.com/msanguineti/git-oneflow/commit/5d643ba468e7d1c92ca95a653b0000b1b7993972))
+
 ### [1.2.2](https://github.com/msanguineti/git-oneflow/compare/v1.2.1...v1.2.2) (2020-06-15)
 
 ### Bug Fixes
