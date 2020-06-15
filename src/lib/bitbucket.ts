@@ -7,8 +7,7 @@ const baseUrl = process.env.BITBUCKET_BASE_URL
 const username = process.env.BITBUCKET_USERNAME
 const password = process.env.BITBUCKET_PASSWORD
 
-export const isOK = (): boolean =>
-  !!projectKey && !!repositorySlug && !!baseUrl && !!username && !!password
+export const isOK = (): boolean => !!baseUrl && !!username && !!password
 
 const clientOptions = {
   baseUrl: process.env.BITBUCKET_BASE_URL,
@@ -19,11 +18,14 @@ const clientOptions = {
 }
 
 const client = new BitbucketServer(clientOptions)
-client.authenticate({
-  type: 'basic',
-  username: process.env.BITBUCKET_USERNAME ?? '',
-  password: process.env.BITBUCKET_PASSWORD ?? '',
-})
+
+if (isOK()) {
+  client.authenticate({
+    type: 'basic',
+    username: username ?? '',
+    password: password ?? '',
+  })
+}
 
 export enum PRType {
   Feature = 'feature',

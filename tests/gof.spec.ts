@@ -24,7 +24,7 @@ describe('Program transpiled correctly', () => {
 
 describe('Init command', () => {
   beforeAll(() => {
-    if (shelljs.test('-e', '.git-oneflowrc')) shelljs.rm('.git-oneflowrc')
+    if (shelljs.test('-e', '.git-oneflow-bbrc')) shelljs.rm('.git-oneflow-bbrc')
   })
 
   it('creates default config file', () => {
@@ -35,7 +35,7 @@ describe('Init command', () => {
     expect(shellString.stdout).toContain(
       'config: new configuration file created'
     )
-    expect(shelljs.test('-e', '.git-oneflowrc')).toBe(true)
+    expect(shelljs.test('-e', '.git-oneflow-bbrc')).toBe(true)
   })
 
   it('refuses to create a config file', () => {
@@ -55,7 +55,7 @@ describe('Init command', () => {
   })
 
   afterAll(() => {
-    shelljs.rm('.git-oneflowrc')
+    shelljs.rm('.git-oneflow-bbrc')
   })
 })
 
@@ -80,7 +80,7 @@ describe('Start/Finish commands', () => {
       silent: true,
     })
 
-    expect(shellString.stdout).toContain('Usage: git-oneflow start|s')
+    expect(shellString.stdout).toContain('Usage: git-oneflow-bb start|s')
   })
 
   it('starts a feature', () => {

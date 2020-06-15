@@ -85,6 +85,14 @@ const configInitQuestions = (): inquisitor.GofQuestion[] => [
     name: config.optionNames.tagCommit,
     defaultValue: config.getConfigValue('tagCommit') === 'true',
   }),
+  inquisitor.askInput({
+    message: 'Bitbucket project key?',
+    name: config.optionNames.projectKey,
+  }),
+  inquisitor.askInput({
+    message: 'Bitbucket repository slug?',
+    name: config.optionNames.repositorySlug,
+  }),
 ]
 
 const maybePromptUser = async (defaults?: boolean): Promise<string> => {

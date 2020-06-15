@@ -6,7 +6,7 @@ OneFlow is a git branching model proposed by [Adam Ruka](https://github.com/skin
 
 In [this article](https://www.endoflineblog.com/oneflow-a-git-branching-model-and-workflow#develop-feature-branches), Adam describes how it works and when it should be employed.
 
-This project puts together some CLI commands to leverage the OneFlow model. It is heavily based on [this repo](https://github.com/msanguineti/git-oneflow) by M. Sanguineti (MIT license), and includes a few minor modifications, notably to support Bitbucket PRs.
+This project puts together some CLI commands to leverage the OneFlow model. It is heavily based on [this repo](https://github.com/msanguineti/git-oneflow) by M. Sanguineti (MIT license), and includes a few minor modifications, notably to support Bitbucket Server PRs.
 
 **_This workflow is not for the uninitiated:_**
 
@@ -84,7 +84,7 @@ $ gof start feature my-feature
 $ git checkout -b feature/my-feature
 ```
 
-Finishing a feature is done by rebasing:
+Finishing a feature is done by rebasing...
 
 ```sh
 $ gof finish feature my-feature
@@ -93,7 +93,7 @@ $ git checkout feature/my-feature
 $ git rebase -i master
 ```
 
-- issuing a PR to merge `feature/my-feature` into `master`
+... and issuing a PR to merge `feature/my-feature` into `master`
 
 If you have commit rights on `master`, you may use the `--merge` flag to skip the PR step:
 

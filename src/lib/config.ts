@@ -18,8 +18,8 @@ type Configuration = {
   deleteAfterMerge: boolean
   pushAfterMerge: boolean
   tagCommit: boolean
-  projectKey?: string
-  repositorySlug?: string
+  projectKey: string
+  repositorySlug: string
 }
 
 export const strategyOptionValues: StrategyOptions[] = [
@@ -39,8 +39,8 @@ export const defaultConfiguration: Configuration = {
   deleteAfterMerge: true,
   pushAfterMerge: true,
   tagCommit: true,
-  projectKey: undefined,
-  repositorySlug: undefined,
+  projectKey: '<Replace here>',
+  repositorySlug: '<Replace here>',
 }
 
 export const optionNames = Object.keys(defaultConfiguration)

@@ -16,7 +16,7 @@ const main = async (): Promise<void> => {
 
   if (!bb.isOK())
     throw new Error(
-      'Please make sure the project key and repository slug are configured in .gitoneflowrc, and set your bitbucket credentials in the following env variables: BITBUCKET_BASE_URL, BITBUCKET_USERNAME, BITBUCKET_PASSWORD'
+      'Please set your bitbucket credentials in the following env variables: BITBUCKET_BASE_URL, BITBUCKET_USERNAME, BITBUCKET_PASSWORD'
     )
 
   program

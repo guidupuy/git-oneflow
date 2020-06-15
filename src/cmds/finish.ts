@@ -258,9 +258,8 @@ const feature: gofCommand.GofCommand = {
         cmd.interactive ?? config.getConfigValue('interactive') === 'true'
       )
 
+    git.checkoutBranch(onto)
     if (cmd.merge) {
-      git.checkoutBranch(onto)
-
       if (/no-ff/.test(strategy)) git.mergeBranch(branchName, '--no-ff')
       else git.mergeBranch(branchName, '--ff-only')
 

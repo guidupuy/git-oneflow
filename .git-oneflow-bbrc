@@ -1,0 +1,13 @@
+{
+  "main": "master",
+  "features": "feature",
+  "releases": "release",
+  "hotfixes": "hotfix",
+  "strategy": "rebase",
+  "interactive": true,
+  "pushAfterMerge": true,
+  "deleteAfterMerge": true,
+  "tagCommit": true,
+  "projectKey": "CONN",
+  "repositorySlug": "afiniti-bottle-api"
+}
