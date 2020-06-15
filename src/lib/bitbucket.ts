@@ -1,9 +1,9 @@
 import BitbucketServer from '@atlassian/bitbucket-server'
 import * as config from './config'
 
-const baseUrl = process.env.BITBUCKET_BASE_URL
-const username = process.env.BITBUCKET_USERNAME
-const password = process.env.BITBUCKET_PASSWORD
+const baseUrl = process.env.BITBUCKET_BASE_URL?.trim()
+const username = process.env.BITBUCKET_USERNAME?.trim()
+const password = process.env.BITBUCKET_PASSWORD?.trim()
 
 export const isOK = (): boolean => !!baseUrl && !!username && !!password
 
