@@ -258,8 +258,8 @@ const feature: gofCommand.GofCommand = {
         cmd.interactive ?? config.getConfigValue('interactive') === 'true'
       )
 
-    git.checkoutBranch(onto)
     if (cmd.merge) {
+      git.checkoutBranch(onto)
       if (/no-ff/.test(strategy)) git.mergeBranch(branchName, '--no-ff')
       else git.mergeBranch(branchName, '--ff-only')
 
@@ -268,6 +268,7 @@ const feature: gofCommand.GofCommand = {
       await maybeDeleteBranch(cmd.delete, branchName)
     } else {
       bb.createPR(bb.PRType.Feature, arg, onto)
+      git.checkoutBranch(onto)
     }
   },
 }
